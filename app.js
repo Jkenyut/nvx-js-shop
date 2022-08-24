@@ -104,7 +104,7 @@ mongoose
   .then((result) => {
     port = process.env.PORT || 9001;
     app.listen(port, () => {
-      console.log(`listening to port ${port}`);
+      console.log(`listening to port server ${port}`);
     });
   })
   .catch((err) => {
