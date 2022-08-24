@@ -102,7 +102,7 @@ app.use((error, req, res, next) => {
 mongoose
   .connect(MONGODB_URI)
   .then((result) => {
-    port = process.env.PORT || 3000;
+    port = process.env.PORT || 9000;
     app.listen(port, () => {
       console.log(`listening to port ${port}`);
     });
