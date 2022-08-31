@@ -10,6 +10,11 @@ const flash = require("connect-flash");
 const multer = require("multer");
 const errorController = require("./controllers/error");
 const User = require("./models/user");
+const helmet = require("helmet");
+const compression = require("compression");
+const morgan = require("morgan");
+const csrfProtection = csrf();
+const fs = require("fs");
 require("dotenv").config();
 
 const MONGODB_URI = process.env.URI_MONGODB;
@@ -19,11 +24,17 @@ const store = new MongoDBStore({
   uri: MONGODB_URI,
   collection: "sessions",
 });
-const csrfProtection = csrf();
 
 app.set("view engine", "ejs");
 app.set("views", "views");
 
+app.use(compression());
+app.disable("x-powered-by");
+app.use(helmet());
+const accessLog = fs.createWriteStream(path.join(__dirname, "access.log"), {
+  flags: "a",
+});
+morgan("combined", { stream: accessLog });
 const adminRoutes = require("./routes/admin");
 const shopRoutes = require("./routes/shop");
 const authRoutes = require("./routes/auth");
