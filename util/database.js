@@ -2,7 +2,7 @@ const MongoClient = require("mongodb").MongoClient;
 let _db;
 const mongoConnect = (callback) => {
     MongoClient.connect(
-        "mongodb+srv://satria:root@cluster0.fzxvxzs.mongodb.net/shop?retryWrites=true&w=majority"
+        ""
     )
         .then((client) => {
             console.log("ok");
